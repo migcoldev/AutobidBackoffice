@@ -25,12 +25,22 @@
             <badge v-if="this.$route.query.mensaje == 'actualizado'" class="badge-dot mr-4" type="success">
               Vehículo actualizado correctamente
             </badge>
+            <badge v-if="this.$route.query.mensaje == 'eliminado'" class="badge-dot mr-4" type="success">
+              Vehículo eliminado correctamente
+            </badge>
+            <badge v-if="this.$route.query.mensaje == 'activado'" class="badge-dot mr-4" type="success">
+              Vehículo activado correctamente
+            </badge>
+            <badge v-if="this.$route.query.mensaje == 'desactivado'" class="badge-dot mr-4" type="success">
+              Vehículo desactivado correctamente
+            </badge>
         </div>
-        <!--<div class="col text-right">
-          <router-link class="navbar-brand" to="/especialidades/registrar">
+        <div class="col text-right">
+          Total de registros: {{count}}
+          <!--<router-link class="navbar-brand" to="/especialidades/registrar">
             <base-button type="primary" size="sm">Nuevo vehículo</base-button>
-          </router-link>
-        </div>-->
+          </router-link>-->
+        </div>
       </div>
     </div>
 
@@ -138,7 +148,8 @@ export default {
           .delete(process.env.VUE_APP_API_URL + 'backoffice/bid/delete', { code: id })
           .then((response) => {
             console.log(response)
-            window.location.reload()
+            //window.location.reload()
+            router.push('/vehiculos?mensaje=eliminado')
           })
           .catch(err => console.log(err))
       }
@@ -150,7 +161,8 @@ export default {
           .post(process.env.VUE_APP_API_URL + 'backoffice/bid/activate',  { code: id })
           .then((response) => {
             console.log(response)
-            window.location.reload()
+            //window.location.reload()
+            router.push('/vehiculos?mensaje=activado')
           })
           .catch(err => console.log(err))
       }
@@ -162,7 +174,8 @@ export default {
           .post(process.env.VUE_APP_API_URL + 'backoffice/bid/deactivate', { code: id })
           .then((response) => {
             console.log(response)
-            window.location.reload()
+            //window.location.reload()
+            router.push('/vehiculos?mensaje=desactivado')
           })
           .catch(err => console.log(err))
       }

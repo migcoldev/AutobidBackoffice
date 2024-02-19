@@ -25,6 +25,9 @@
             <badge v-if="this.$route.query.mensaje == 'actualizado'" class="badge-dot mr-4" type="success">
               Solicitud actualizada correctamente
             </badge>
+            <badge v-if="this.$route.query.mensaje == 'eliminado'" class="badge-dot mr-4" type="success">
+              Solicitud eliminada correctamente
+            </badge>
         </div>
         <!--<div class="col text-right">
           <router-link class="navbar-brand" to="/solicitudes/registrar">
@@ -61,6 +64,7 @@
           <td>{{row.item.created_at}}</td>
 
           <td class="text-right">
+            <div class="icon-div cursor-pointer btn btn-danger btn-sm" v-on:click="eliminarSolicitud(row.item.code)">Eliminar</div>
           </td>
         </template>
       </base-table>
@@ -107,7 +111,7 @@ export default {
       }
       console.log(params)
       axios
-        .get(process.env.VUE_APP_API_URL + 'backoffice/bid/requests?page=' + clase.page, params)
+        .get(process.env.VUE_APP_API_URL + 'backoffice/request/all?page=' + clase.page, params)
         .then((response) => {
           console.log(response.data.data)
           this.items = response.data.data
@@ -127,10 +131,11 @@ export default {
       let router = this.$router
       if (window.confirm("¿Está seguro(a) de eliminar el registro?")) {
         axios
-          .delete(process.env.VUE_APP_API_URL + 'backoffice/requests/delete', { data: { id: id }})
+          .delete(process.env.VUE_APP_API_URL + 'backoffice/request/delete', { data: { code: id }})
           .then((response) => {
             console.log(response)
-            window.location.reload()
+            //window.location.reload()
+            router.push('/solicitudes?mensaje=eliminado')
           })
           .catch(err => console.log(err))
       }
