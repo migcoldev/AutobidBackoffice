@@ -16,6 +16,7 @@ import Vehiculos from "../views/vehiculos/index.vue";
 import VehiculosRegistro from "../views/vehiculos/registrar.vue";
 import VehiculosEditar from "../views/vehiculos/editar.vue";
 import Solicitudes from "../views/solicitudes/index.vue";
+import SolicitudesDetalle from "../views/solicitudes/detalle.vue";
 import HistorialScrapeo from "../views/historial_scrapeo/index.vue";
 
 const routes = [
@@ -67,6 +68,11 @@ const routes = [
         path: "/solicitudes",
         name: "solicitudes",
         components: { default: Solicitudes },
+      },
+      {
+        path: "/solicitudes/detalle/:code",
+        name: "solicitudes_detalle",
+        components: { default: SolicitudesDetalle },
       },
       {
         path: "/historial_scrapeo",

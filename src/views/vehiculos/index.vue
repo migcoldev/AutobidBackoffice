@@ -36,10 +36,32 @@
             </badge>
         </div>
         <div class="col text-right">
-          Total de registros: {{count}}
           <!--<router-link class="navbar-brand" to="/especialidades/registrar">
             <base-button type="primary" size="sm">Nuevo vehículo</base-button>
           </router-link>-->
+        </div>
+      </div>
+      <div class="row align-items-center">
+        <div class="col">
+          <div class="form-group">
+            <div class="input-group">
+              <input type="text" class="form-control" v-model="searchtext" placeholder="Ingrese VIN o Nro Lote">
+              
+              <button
+                type="button"
+                data-dismiss="alert"
+                aria-label="Buscar"
+                class="btn-primary btn"
+                @click="filtrar"
+              >Buscar
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col text-right">
+          <div class="form-group">
+            Total de registros: {{count}}
+          </div>
         </div>
       </div>
     </div>
@@ -63,7 +85,7 @@
         </template>
 
         <template v-slot:default="row">
-          <td>{{row.item.vin}}</td>
+          <td><router-link :to=" 'https://autobidregistry.com/history/detail/' + row.item.alias" target="_blank">{{row.item.vin}}</router-link></td>
           <td>{{row.item.lot_number}}</td>
           <td>{{row.item.year}}</td>
           <td>{{row.item.brand}}</td>
@@ -103,6 +125,7 @@ export default {
   name: 'vehiculos',
   data () {
     return {
+      searchtext: '',
       items: [],
       currentTutorial: null,
       currentIndex: -1,
@@ -117,15 +140,19 @@ export default {
     }
   },
   methods: {
+    filtrar () {
+      this.page = 1;
+      this.obtenerVehiculos();
+    },
     obtenerVehiculos () {
       var clase = this
       var params = {
         per_page: this.pageSize,
-        filter: this.filter
+        filter: this.filter,
+        searchtext: this.searchtext
       }
-      console.log(params)
       axios
-        .get(process.env.VUE_APP_API_URL + 'backoffice/bid/all?page=' + clase.page, params)
+        .post(process.env.VUE_APP_API_URL + 'backoffice/bid/all?page=' + clase.page, params)
         .then((response) => {
           console.log(response.data.data)
           this.items = response.data.data

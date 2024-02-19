@@ -56,7 +56,9 @@
         </template>
 
         <template v-slot:default="row">
-          <td class="text-xs py-3 px-4">{{row.item.id}}</td>
+          <td>
+            <router-link :to="'/solicitudes/detalle/' + row.item.code" target="_blank">{{row.item.vin}}</router-link>
+          </td>
           <td>{{row.item.first_name}}</td>
           <td>{{row.item.last_name}}</td>
           <td>{{row.item.email}}</td>
