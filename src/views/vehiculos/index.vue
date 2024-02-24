@@ -76,6 +76,7 @@
       >
         <template v-slot:columns>
           <th>VIN</th>
+          <th>Web</th>
           <th>Lote</th>
           <th>Año</th>
           <th>Marca</th>
@@ -86,6 +87,7 @@
 
         <template v-slot:default="row">
           <td><router-link :to=" 'https://autobidregistry.com/history/detail/' + row.item.alias" target="_blank">{{row.item.vin}}</router-link></td>
+          <td>{{row.item.origin}}</td>
           <td>{{row.item.lot_number}}</td>
           <td>{{row.item.year}}</td>
           <td>{{row.item.brand}}</td>
