@@ -44,6 +44,7 @@
       >
         <template v-slot:columns>
           <th>#</th>
+          <th>Origen</th>
           <th>Proxy</th>
           <th>Status</th>
           <th>Fecha Ejecución</th>
@@ -52,6 +53,7 @@
 
         <template v-slot:default="row">
           <td class="text-xs py-3 px-4">{{row.item.id}}</td>
+          <td>{{row.item.origin_code.toUpperCase()}}</td>
           <td>{{row.item.proxy}}</td>
           <td v-if="row.item.status === 2">Finalizado</td>
           <td v-else>Pendiente</td>
