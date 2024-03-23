@@ -81,6 +81,7 @@
           <th>Año</th>
           <th>Marca</th>
           <th>Modelo</th>
+          <th>Last Bid Obtained</th>
           <th>Fecha Creación</th>
           <th></th>
         </template>
@@ -92,6 +93,7 @@
           <td>{{row.item.year}}</td>
           <td>{{row.item.brand}}</td>
           <td>{{row.item.model}}</td>
+          <td>${{row.item.last_bid}}</td>
           <td>{{row.item.created_at}}</td>
 
           <td class="text-right">
