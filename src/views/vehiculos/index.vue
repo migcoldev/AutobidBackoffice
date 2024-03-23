@@ -86,7 +86,7 @@
         </template>
 
         <template v-slot:default="row">
-          <td><router-link :to=" 'https://autobidregistry.com/history/detail/' + row.item.alias" target="_blank">{{row.item.vin}}</router-link></td>
+          <td><router-link :to=" 'https://autobidregistry.com/history/detail/' + row.item.vin + '/' + row.item.alias" target="_blank">{{row.item.vin}}</router-link></td>
           <td>{{row.item.origin.toUpperCase()}}</td>
           <td>{{row.item.lot_number}}</td>
           <td>{{row.item.year}}</td>
